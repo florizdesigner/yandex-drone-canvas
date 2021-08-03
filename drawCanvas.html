@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <link rel='stylesheet' href='style.css'>
+    <title>Title</title>
+<!--    <script src='./javascript.js'></script>-->
+</head>
+<body>
+<style>
+    /*
+    #f45a3b,
+    #000000,
+    #d8d8d8,
+    #ff0000,
+    #999999,
+    #666666,
+    #222222,
+    #ffffff
+    */
+    html {
+        background-image: linear-gradient(45deg, #f45a3b, #ffffff);
+    }
+    canvas {
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+
+<script>window.onload = function() {
+    let drawingCanvas = document.getElementById('yandex');
+    if(drawingCanvas && drawingCanvas.getContext) {
+        let ctx = drawingCanvas.getContext('2d');
+
+        //#f45a3b, #000000, #d8d8d8, #ﬀ0000, #999999, #666666, #222222, #ﬀﬀﬀ.
+
+
+
+        // рисуем серую часть
+        ctx.fillStyle = '#222222'
+        ctx.beginPath()
+        ctx.moveTo(270, 720)
+        ctx.lineTo(270, 755)
+        ctx.lineTo(340, 825)
+        ctx.lineTo(690, 825)
+        ctx.lineTo(760, 755)
+        ctx.lineTo(760, 725)
+        ctx.lineTo(750, 715)
+        ctx.lineTo(280, 715)
+        ctx.lineTo(280, 715)
+        ctx.lineTo(270, 725)
+        ctx.fill()
+
+        // рисуем колеса
+        ctx.fillStyle = '#000'
+        ctx.beginPath()
+        ctx.arc(345, 820, 65, 0, Math.PI*2, true)
+        ctx.arc(520, 820, 65, 0, Math.PI*2, true)
+        ctx.arc(695, 820, 65, 0, Math.PI*2, true)
+        ctx.closePath()
+        ctx.fill()
+
+
+
+        // рисуем серую крышку
+
+        ctx.fillStyle = '#d8d8d8'
+        ctx.beginPath();
+        ctx.moveTo(250, 570);
+        ctx.lineTo(250, 569);
+        ctx.arcTo(250, 520, 320, 520, 50)
+        ctx.lineTo(400, 520)
+        ctx.bezierCurveTo(780, 520, 780, 550, 775, 570)
+        ctx.lineTo(250, 570)
+        ctx.fill()
+
+
+
+        // рисуем оранжевый и красный прямоугольники
+        function drawRectangle (x, y, width, height, radius, colorFill=null, colorStroke=null) {
+            ctx.fillStyle = colorFill
+            ctx.strokeStyle = colorStroke
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            if (colorFill && colorStroke) {
+                ctx.fill()
+                ctx.stroke()
+            } else if (colorStroke) {
+                ctx.stroke()
+            } else if(colorFill) {
+                ctx.fill()
+            }
+
+        }
+        // алый
+        drawRectangle(255, 570, 520, 145, 25, '#f45a3b')
+        // красный
+        drawRectangle(245,570, 540, 15, 10, '#ff0000')
+        // рисуем серый прямоугольник на черной трапеции
+        drawRectangle(356, 425, 54, 44, 5, '#666666')
+        // рисуем черный маленький прямоугольник под градиент
+        drawRectangle(356, 425, 54, 8, 5, '#000000')
+
+        // рисуем черную трапецию
+        ctx.fillStyle = '#000000'
+        ctx.beginPath()
+        ctx.moveTo(320, 520)
+        ctx.lineTo(415,520)
+        ctx.lineTo(415, 465)
+        ctx.lineTo(340, 465)
+        ctx.lineTo(320, 520)
+        ctx.fill()
+
+        // рисуем флаг
+        ctx.fillStyle = '#ff0000'
+        ctx.beginPath()
+        ctx.moveTo(380,150)
+        ctx.lineTo(315, 130)
+        ctx.lineTo(380, 110)
+        ctx.lineTo(380, 150)
+        ctx.closePath()
+        ctx.fill()
+
+        // рисуем антенну
+        function antenna () {
+            ctx.strokeStyle = '#999999'
+            ctx.beginPath()
+            ctx.moveTo(383, 425)
+            ctx.lineTo(383, 105)
+            ctx.lineWidth = 5
+            ctx.stroke()
+        }
+        antenna()
+
+
+    }
+}</script>
+
+<canvas id='yandex' height='1000' width='1000'>
+    <p>Яндекс.Тележенька</p>
+</canvas>
+
+
+</body>
+</html>
